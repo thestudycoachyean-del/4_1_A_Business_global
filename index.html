@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4.1 Globalisation — Edexcel A-Level Business</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1923;
+    --paper: #f7f4ee;
+    --cream: #ede8df;
+    --teal: #0a7c6e;
+    --teal-light: #d0ede9;
+    --gold: #c8892a;
+    --gold-light: #fdf1dc;
+    --red: #c0392b;
+    --red-light: #fde8e6;
+    --blue: #1a3c6e;
+    --blue-light: #dde8f7;
+    --lesson-1: #0a7c6e;
+    --lesson-2: #1a3c6e;
+    --lesson-3: #7b3fa0;
+    --lesson-4: #c0392b;
+    --lesson-5: #c8892a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--ink);
+    color: white;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+  }
+  .site-header .badge {
+    background: var(--teal);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+  }
+  .site-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    flex: 1;
+  }
+  .site-header .subtitle {
+    font-size: 0.8rem;
+    color: #aaa;
+  }
+
+  /* ── LESSON TABS ── */
+  .lesson-tabs {
+    display: flex;
+    overflow-x: auto;
+    background: var(--ink);
+    border-top: 1px solid #2a2a2a;
+    gap: 2px;
+    padding: 0 1rem;
+  }
+  .lesson-tabs::-webkit-scrollbar { height: 3px; }
+  .lesson-tabs::-webkit-scrollbar-thumb { background: var(--teal); }
+
+  .tab-btn {
+    background: transparent;
+    border: none;
+    color: #999;
+    padding: 0.8rem 1.2rem;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .tab-btn:hover { color: white; }
+  .tab-btn.active { color: white; }
+  .tab-btn[data-lesson="1"].active { border-bottom-color: var(--lesson-1); }
+  .tab-btn[data-lesson="2"].active { border-bottom-color: var(--lesson-2); }
+  .tab-btn[data-lesson="3"].active { border-bottom-color: var(--lesson-3); }
+  .tab-btn[data-lesson="4"].active { border-bottom-color: var(--lesson-4); }
+  .tab-btn[data-lesson="5"].active { border-bottom-color: var(--lesson-5); }
+  .tab-btn[data-lesson="6"].active { border-bottom-color: #e67e22; }
+
+  .tab-num {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .tab-btn[data-lesson="1"] .tab-num { background: var(--lesson-1); color: white; }
+  .tab-btn[data-lesson="2"] .tab-num { background: var(--lesson-2); color: white; }
+  .tab-btn[data-lesson="3"] .tab-num { background: var(--lesson-3); color: white; }
+  .tab-btn[data-lesson="4"] .tab-num { background: var(--lesson-4); color: white; }
+  .tab-btn[data-lesson="5"] .tab-num { background: var(--lesson-5); color: white; }
+  .tab-btn[data-lesson="6"] .tab-num { background: #e67e22; color: white; }
+
+  /* ── CONTENT ── */
+  .lesson-panel { display: none; animation: fadeIn 0.3s ease; }
+  .lesson-panel.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── LESSON HERO ── */
+  .lesson-hero {
+    padding: 3rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .lesson-hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    opacity: 0.07;
+  }
+  .lesson-1 .lesson-hero::before { background: var(--lesson-1); }
+  .lesson-2 .lesson-hero::before { background: var(--lesson-2); }
+  .lesson-3 .lesson-hero::before { background: var(--lesson-3); }
+  .lesson-4 .lesson-hero::before { background: var(--lesson-4); }
+  .lesson-5 .lesson-hero::before { background: var(--lesson-5); }
+  .lesson-6 .lesson-hero::before { background: #e67e22; }
+
+  .lesson-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: white;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+  .lesson-1 .lesson-tag { background: var(--lesson-1); }
+  .lesson-2 .lesson-tag { background: var(--lesson-2); }
+  .lesson-3 .lesson-tag { background: var(--lesson-3); }
+  .lesson-4 .lesson-tag { background: var(--lesson-4); }
+  .lesson-5 .lesson-tag { background: var(--lesson-5); }
+  .lesson-6 .lesson-tag { background: #e67e22; }
+
+  .lesson-hero h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+  .lesson-hero .lesson-desc {
+    font-size: 1rem;
+    color: #555;
+    max-width: 620px;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  .lesson-objectives {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .obj-pill {
+    background: var(--cream);
+    border: 1px solid #ddd;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    color: #444;
+  }
+
+  /* ── CONTENT AREA ── */
+  .lesson-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  /* ── TOPIC HEADER ── */
+  .topic-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    margin: 2rem 0 1rem;
+    border-radius: 12px;
+    position: relative;
+  }
+  .lesson-1 .topic-header { background: var(--teal-light); border-left: 5px solid var(--lesson-1); }
+  .lesson-2 .topic-header { background: var(--blue-light); border-left: 5px solid var(--lesson-2); }
+  .lesson-3 .topic-header { background: #f0e8f8; border-left: 5px solid var(--lesson-3); }
+  .lesson-4 .topic-header { background: var(--red-light); border-left: 5px solid var(--lesson-4); }
+  .lesson-5 .topic-header { background: var(--gold-light); border-left: 5px solid var(--lesson-5); }
+  .lesson-6 .topic-header { background: #fef3e2; border-left: 5px solid #e67e22; }
+
+  .topic-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+  .topic-header h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+  }
+  .topic-header p {
+    font-size: 0.82rem;
+    color: #666;
+    margin-top: 0.2rem;
+  }
+
+  /* ── CONTENT GRID ── */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .content-grid.thirds { grid-template-columns: 1fr 1fr 1fr; }
+  .content-grid.wide { grid-template-columns: 2fr 1fr; }
+  .content-grid.single { grid-template-columns: 1fr; }
+  @media (max-width: 700px) {
+    .content-grid, .content-grid.thirds, .content-grid.wide { grid-template-columns: 1fr; }
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.4rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid #e8e4dc;
+  }
+  .card h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .card ul { padding-left: 0; list-style: none; }
+  .card ul li {
+    padding: 0.35rem 0 0.35rem 1.4rem;
+    position: relative;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: #333;
+    border-bottom: 1px solid #f0ece4;
+  }
+  .card ul li:last-child { border-bottom: none; }
+  .card ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #bbb;
+    font-size: 0.8rem;
+  }
+
+  /* ── DEFINITION BOX ── */
+  .definition {
+    background: var(--ink);
+    color: white;
+    border-radius: 12px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 1rem;
+  }
+  .definition .def-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 0.4rem;
+  }
+  .definition p {
+    font-size: 1rem;
+    line-height: 1.6;
+    font-style: italic;
+  }
+  .definition strong { color: var(--teal); font-style: normal; }
+
+  /* ── REAL WORLD / EXAMINER TIP ── */
+  .real-world, .examiner-tip {
+    background: var(--gold-light);
+    border: 1.5px solid #e8c878;
+    border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .real-world .rw-label, .examiner-tip .tip-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .real-world h4, .examiner-tip h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .real-world p, .examiner-tip p { font-size: 0.85rem; line-height: 1.55; color: #555; }
+
+  /* ── COMPARE TABLE ── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 1rem;
+  }
+  .compare-table th {
+    padding: 0.9rem 1.1rem;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+  .compare-table th:first-child { background: #f0f0f0; color: #444; }
+  .compare-table th.green-head { background: var(--teal); color: white; }
+  .compare-table th.red-head { background: var(--red); color: white; }
+  .compare-table td { padding: 0.75rem 1.1rem; vertical-align: top; border-top: 1px solid #f0ece4; line-height: 1.5; }
+  .compare-table td:first-child { font-weight: 600; background: #fafaf8; font-size: 0.8rem; }
+  .compare-table tr:hover td { background: #fdf8f0; }
+
+  /* ── STAT CALLOUT ── */
+  .stat-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .stat-box {
+    flex: 1;
+    min-width: 140px;
+    background: white;
+    border-radius: 12px;
+    padding: 1.2rem;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid #e8e4dc;
+  }
+  .stat-box .stat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .stat-box .stat-label { font-size: 0.75rem; color: #777; line-height: 1.4; }
+
+  /* ── INDICATOR CARDS ── */
+  .indicator-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 700px) { .indicator-grid { grid-template-columns: 1fr 1fr; } }
+  .indicator-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.1rem;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    border-top: 4px solid;
+  }
+  .indicator-card:nth-child(1) { border-color: var(--teal); }
+  .indicator-card:nth-child(2) { border-color: var(--blue); }
+  .indicator-card:nth-child(3) { border-color: var(--lesson-3); }
+  .indicator-card:nth-child(4) { border-color: var(--gold); }
+  .indicator-card .ic-icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
+  .indicator-card h4 { font-size: 0.8rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .indicator-card p { font-size: 0.73rem; color: #666; line-height: 1.4; }
+
+  /* ── PROTECTION METHODS ── */
+  .protection-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 800px) { .protection-cards { grid-template-columns: 1fr 1fr; } }
+  .pcard {
+    background: white;
+    border-radius: 12px;
+    padding: 1.1rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-top: 4px solid var(--red);
+  }
+  .pcard .pc-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .pcard h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .pcard p { font-size: 0.75rem; color: #666; line-height: 1.45; }
+
+  /* ── TRADING BLOC CARDS ── */
+  .bloc-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 700px) { .bloc-cards { grid-template-columns: 1fr; } }
+  .bloc-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  }
+  .bloc-card .bloc-head {
+    padding: 1rem 1.2rem;
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .bloc-card:nth-child(1) .bloc-head { background: #003399; }
+  .bloc-card:nth-child(2) .bloc-head { background: #c8892a; }
+  .bloc-card:nth-child(3) .bloc-head { background: #c0392b; }
+  .bloc-card .bloc-body { padding: 1rem 1.2rem; }
+  .bloc-card .bloc-body li {
+    font-size: 0.8rem;
+    color: #444;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    list-style: none;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .bloc-card .bloc-body li::before { content: '›'; position: absolute; left: 0; color: #bbb; }
+  .bloc-card .bloc-body li:last-child { border-bottom: none; }
+
+  /* ── BRICS / MINT BADGE ── */
+  .group-badges {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .gbadge {
+    background: var(--ink);
+    color: white;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+  }
+  .gbadge span { font-weight: 300; font-size: 0.72rem; margin-left: 0.4rem; color: #aaa; }
+
+  /* ── QUIZ SECTION ── */
+  .quiz-section {
+    background: var(--ink);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-top: 2.5rem;
+    color: white;
+  }
+  .quiz-section h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .quiz-section .quiz-subtitle { color: #aaa; font-size: 0.82rem; margin-bottom: 1.5rem; }
+
+  .quiz-q {
+    background: #1e2d3d;
+    border-radius: 12px;
+    padding: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .quiz-q .q-text { font-size: 0.95rem; font-weight: 500; margin-bottom: 1rem; line-height: 1.5; }
+  .quiz-q .q-num {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 0.5rem;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  @media (max-width: 600px) { .options-grid { grid-template-columns: 1fr; } }
+
+  .opt-btn {
+    background: #2a3f52;
+    border: 1.5px solid #3a5068;
+    color: white;
+    border-radius: 8px;
+    padding: 0.7rem 1rem;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.83rem;
+    transition: all 0.2s;
+    line-height: 1.4;
+  }
+  .opt-btn:hover:not(:disabled) { background: #35506a; border-color: #6090bb; }
+  .opt-btn.correct { background: #0a5c4e; border-color: var(--teal); }
+  .opt-btn.wrong { background: #5c1a1a; border-color: var(--red); }
+  .opt-btn:disabled { cursor: default; }
+
+  .feedback {
+    margin-top: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.83rem;
+    line-height: 1.5;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.fb-correct { background: #0a4a3e; color: #a0f0d8; border-left: 3px solid var(--teal); }
+  .feedback.fb-wrong { background: #4a1a1a; color: #f0a0a0; border-left: 3px solid var(--red); }
+
+  /* ── PROGRESS ── */
+  .progress-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    color: #aaa;
+    margin-top: 1rem;
+  }
+  .progress-bar {
+    flex: 1;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--teal);
+    transition: width 0.4s;
+  }
+
+  /* ── NAV BUTTONS ── */
+  .lesson-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem 2.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .nav-btn {
+    background: white;
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    padding: 0.7rem 1.2rem;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .nav-btn:hover { background: var(--ink); color: white; border-color: var(--ink); }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; }
+
+  /* GDP chart */
+  .gdp-chart {
+    background: white;
+    border-radius: 12px;
+    padding: 1.2rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 1rem;
+  }
+  .gdp-chart h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.8rem; color: #444; }
+  .bar-wrap { display: flex; align-items: flex-end; gap: 4px; height: 100px; margin-bottom: 0.5rem; }
+  .bar-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .bar-fill { width: 100%; border-radius: 4px 4px 0 0; transition: all 0.3s; }
+  .bar-label { font-size: 0.6rem; color: #888; text-align: center; }
+
+  .fdi-box {
+    background: linear-gradient(135deg, #1a3c6e, #0a7c6e);
+    color: white;
+    border-radius: 12px;
+    padding: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .fdi-box h4 { font-family: 'Fraunces', serif; font-size: 1.05rem; margin-bottom: 0.8rem; }
+  .fdi-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .fdi-type {
+    flex: 1;
+    min-width: 180px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 0.9rem;
+  }
+  .fdi-type h5 { font-size: 0.82rem; font-weight: 700; margin-bottom: 0.4rem; opacity: 0.9; }
+  .fdi-type p { font-size: 0.78rem; opacity: 0.75; line-height: 1.45; }
+
+  /* SPEC BOX */
+  .spec-box { margin: 0 1.5rem 0; background: white; border: 2px solid var(--ink); border-radius: 12px; padding: 1.2rem 1.5rem; }
+  .spec-box-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #888; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; }
+  .spec-box-label::after { content:''; flex:1; height:1px; background:#eee; }
+  .spec-ref { display: inline-block; background: var(--ink); color: white; font-size: 0.68rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 4px; margin-right: 0.4rem; }
+  .spec-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.3rem; margin-top: 0.4rem; }
+  .spec-list li { font-size: 0.82rem; color: #333; padding-left: 1.4rem; position: relative; line-height: 1.5; }
+  .spec-list li::before { content: '✓'; position: absolute; left: 0; color: var(--teal); font-weight: 700; font-size: 0.75rem; }
+  .spec-list li.sub { padding-left: 2.4rem; color: #555; }
+  .spec-list li.sub::before { content: '○'; color: #bbb; }
+
+  /* PPTX EXTRA */
+  .pptx-card { background: #f0faf7; border: 1.5px solid var(--teal); border-radius: 12px; padding: 1.2rem 1.4rem; margin-bottom: 1rem; }
+  .pptx-card .pt-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem; }
+  .pptx-card h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .pptx-card ul { list-style: none; padding: 0; }
+  .pptx-card ul li { font-size: 0.83rem; padding: 0.28rem 0 0.28rem 1.3rem; position: relative; line-height: 1.5; color: #333; border-bottom: 1px solid #c8e8e0; }
+  .pptx-card ul li:last-child { border-bottom: none; }
+  .pptx-card ul li::before { content: '›'; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+
+  /* EXAM PRACTICE */
+  .exam-section { background: white; border-radius: 16px; padding: 1.8rem; margin-top: 2rem; border: 2px solid var(--ink); }
+  .exam-section-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+  .exam-badge { background: var(--ink); color: white; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 6px; }
+  .exam-section h3 { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 700; }
+  .exam-q-card { background: #f8f7f3; border: 1px solid #ddd; border-radius: 12px; margin-bottom: 1.2rem; overflow: hidden; }
+  .exam-q-header { background: var(--ink); color: white; padding: 0.75rem 1.2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem; }
+  .exam-q-header .eq-type { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #aaa; }
+  .exam-q-header .eq-marks { background: var(--gold); color: white; font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 4px; }
+  .exam-q-body { padding: 1.2rem; }
+  .exam-context { background: #fffde7; border-left: 3px solid var(--gold); padding: 0.8rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 0.9rem; font-size: 0.83rem; line-height: 1.6; color: #444; }
+  .exam-question { font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-bottom: 1rem; line-height: 1.5; }
+  .exam-toggle-btn { background: var(--ink); color: white; border: none; border-radius: 8px; padding: 0.6rem 1.1rem; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 500; transition: all 0.2s; }
+  .exam-toggle-btn:hover { background: #2a3f52; }
+  .mark-scheme { display: none; margin-top: 1rem; border-top: 1px solid #ddd; padding-top: 1rem; }
+  .mark-scheme.show { display: block; }
+  .ms-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.6rem; }
+  .ms-level { background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 0.8rem 1rem; margin-bottom: 0.6rem; }
+  .ms-level .ml-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem; flex-wrap: wrap; gap: 0.3rem; }
+  .ms-level .ml-title { font-size: 0.78rem; font-weight: 700; }
+  .ms-level .ml-marks { font-size: 0.72rem; font-weight: 700; background: var(--teal); color: white; padding: 0.15rem 0.45rem; border-radius: 4px; }
+  .ms-level p { font-size: 0.78rem; color: #555; line-height: 1.55; }
+  .ms-indicative { background: #f0faf7; border: 1px solid #c8e8e0; border-radius: 8px; padding: 0.85rem 1rem; margin-bottom: 0.6rem; }
+  .ms-indicative h5 { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal); margin-bottom: 0.4rem; margin-top: 0.6rem; }
+  .ms-indicative h5:first-child { margin-top: 0; }
+  .ms-indicative ul { list-style: none; padding: 0; }
+  .ms-indicative ul li { font-size: 0.78rem; color: #444; padding: 0.22rem 0 0.22rem 1.2rem; position: relative; border-bottom: 1px solid #c8e8e0; line-height: 1.5; }
+  .ms-indicative ul li:last-child { border-bottom: none; }
+  .ms-indicative ul li::before { content:'•'; position: absolute; left:0; color: var(--teal); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="badge">Edexcel A-Level</div>
+  <h1>4.1 Globalisation — Theme 4</h1>
+  <span class="subtitle">5 Lessons + Exam Practice</span>
+</header>
+
+<nav class="lesson-tabs">
+  <button class="tab-btn active" data-lesson="1" onclick="switchLesson(1)">
+    <span class="tab-num">1</span> Growing Economies
+  </button>
+  <button class="tab-btn" data-lesson="2" onclick="switchLesson(2)">
+    <span class="tab-num">2</span> International Trade & Growth
+  </button>
+  <button class="tab-btn" data-lesson="3" onclick="switchLesson(3)">
+    <span class="tab-num">3</span> Factors of Globalisation
+  </button>
+  <button class="tab-btn" data-lesson="4" onclick="switchLesson(4)">
+    <span class="tab-num">4</span> Protectionism
+  </button>
+  <button class="tab-btn" data-lesson="5" onclick="switchLesson(5)">
+    <span class="tab-num">5</span> Trading Blocs
+  </button>
+  <button class="tab-btn" data-lesson="6" onclick="switchLesson(6)">
+    <span class="tab-num">📝</span> Exam Practice
+  </button>
+</nav>
+
+<div id="lesson-1" class="lesson-panel lesson-1 active">
+  <div class="lesson-hero">
+    <div class="lesson-tag">📈 Lesson 1 of 5 · 4.1.1</div>
+    <h2>Growing Economies</h2>
+    <p class="lesson-desc">How do we measure economic growth, and why are emerging economies outpacing the UK? Understand GDP, the BRICS & MINT groupings, and what growth means for businesses and individuals.</p>
+    <div class="lesson-objectives">
+      <span class="obj-pill">✓ GDP & emerging economies</span>
+      <span class="obj-pill">✓ UK vs emerging economy growth</span>
+      <span class="obj-pill">✓ BRICS & MINT</span>
+      <span class="obj-pill">✓ Implications for businesses & individuals</span>
+    </div>
+  </div>
+
+  <div class="spec-box">
+    <div class="spec-box-label"><span class="spec-ref">4.1.1</span> Specification Learning Outcomes</div>
+    <ul class="spec-list">
+      <li>Growth rate of the UK economy compared with emerging economies</li>
+      <li>Growing economic power of countries within Asia, Africa, and parts of the developing world</li>
+      <li>Implications of growth: Trade opportunities and employment patterns</li>
+      <li>Indicators of growth: GDP per capita, literacy, health, and HDI</li>
+    </ul>
+  </div>
+
+  <div class="lesson-content">
+    <div class="topic-header">
+      <div class="topic-icon">%</div>
+      <div>
+        <h3>What is Economic Growth?</h3>
+        <p>Measuring national output and comparing global performance velocity</p>
+      </div>
+    </div>
+
+    <div class="definition">
+      <div class="def-label">Key Definition</div>
+      <p>The <strong>growth rate</strong> of a country is measured by the annual percentage change in its <strong>Gross Domestic Product (GDP)</strong> — the total value of all goods and services produced within an economy over one year.</p>
+    </div>
+
+    <div class="definition">
+      <div class="def-label">Key Definition</div>
+      <p><strong>Emerging economies</strong> are countries characterized by <strong>rapid industrialisation and high economic growth rates</strong>, yet balancing relatively lower GDP per capita compared to mature nations.</p>
+    </div>
+
+    <div class="topic-header">
+      <div class="topic-icon">🌍</div>
+      <div>
+        <h3>UK vs Emerging Economy Growth</h3>
+        <p>Why do developing clusters fundamentally outpace advanced nations?</p>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="stat-num" style="color:var(--lesson-1)">~14%</div>
+        <div class="stat-label">China's peak historic growth rate velocity</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" style="color:var(--blue)">~1-2%</div>
+        <div class="stat-label">Average structurally mature UK growth baseline</div>
+      </div>
+    </div>
+
+    <div class="gdp-chart">
+      <h4>📊 Simplified GDP Growth Comparison (approximate annual %)</h4>
+      <div class="bar-wrap" id="gdpChart"></div>
+      <div style="display:flex;gap:1rem;font-size:0.75rem;margin-top:0.3rem;">
+        <span style="display:flex;align-items:center;gap:4px;"><span style="width:12px;height:12px;background:var(--teal);border-radius:2px;display:inline-block;"></span>China</span>
+        <span style="display:flex;align-items:center;gap:4px;"><span style="width:12px;height:12px;background:var(--blue);border-radius:2px;display:inline-block;"></span>UK</span>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="card">
+        <h4>🏭 Factors Driving Emerging Growth</h4>
+        <ul>
+          <li>Rapid expansion of secondary manufacturing powerhouses.</li>
+          <li>Inbound FDI looking to exploit structural cost advantages.</li>
+          <li>Favorable demographics alongside massive rural-to-urban shifts.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>🇬🇧 Structural Realities of Mature Nations</h4>
+        <ul>
+          <li>Highly specialized tertiary (service-dominant) economic profiles.</li>
+          <li>Slowing expansion curves due to a highly mature institutional state.</li>
+          <li>Higher baseline production wages increasing domestic cost structures.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pptx-card">
+      <div class="pt-label">📋 Additional Spec Content — Common Features of Emerging Economies</div>
+      <ul>
+        <li><strong>Economic transformation:</strong> Transitioning rapidly from agricultural/primary production to manufacturing and service industries.</li>
+        <li><strong>Rapid industrialisation:</strong> Heavy investment in infrastructure, factories, and urban development.</li>
+        <li><strong>Growing middle class:</strong> Rising disposable incomes create vast new consumer markets for domestic and foreign brands.</li>
+        <li><strong>Volatile exchange rates & institutions:</strong> Financial systems and legal frameworks that are developing but can experience policy shifts or inflation.</li>
+      </ul>
+    </div>
+
+    <div class="topic-header">
+      <div class="topic-icon">🧱</div>
+      <div>
+        <h3>Economic Power Blocs: BRICS & MINT</h3>
+        <p>The key fast-growth country classifications</p>
+      </div>
+    </div>
+
+    <div class="group-badges">
+      <div class="gbadge">BRICS <span>Brazil, Russia, India, China, South Africa</span></div>
+      <div class="gbadge" style="background:var(--blue)">MINT <span>Mexico, Indonesia, Nigeria, Turkey</span></div>
+    </div>
+
+    <div class="topic-header">
+      <div class="topic-icon">📊</div>
+      <div>
+        <h3>The 4 Key Indicators of Growth</h3>
+        <p>How economists evaluate development beyond simple output figures</p>
+      </div>
+    </div>
+
+    <div class="indicator-grid">
+      <div class="indicator-card">
+        <div class="ic-icon">💵</div>
+        <h4>GDP Per Capita</h4>
+        <p>Total economic output divided by population. Measures average income per head.</p>
+      </div>
+      <div class="indicator-card">
+        <div class="ic-icon">📚</div>
+        <h4>Literacy Rates</h4>
+        <p>Percentage of the population who can read and write. Indicates workforce skill capability.</p>
+      </div>
+      <div class="indicator-card">
+        <div class="ic-icon">🏥</div>
+        <h4>Health Indicators</h4>
+        <p>Life expectancy and infant mortality. Reflects infrastructure quality and well-being.</p>
+      </div>
+      <div class="indicator-card">
+        <div class="ic-icon">🌟</div>
+        <h4>HDI</h4>
+        <p>Human Development Index. Combines income, life expectancy, and schooling into a score from 0 to 1.</p>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <h3>✍️ Lesson 1 Checkpoint</h3>
+      <p class="quiz-subtitle">Test your understanding of economic growth metrics</p>
+      <div class="quiz-q">
+        <div class="q-num">Question 1</div>
+        <p class="q-text">Which indicator combines life expectancy, educational attainment, and income per capita into a single metric?</p>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'Wrong! GDP per capita only tracks economic value per person.')">GDP per capita</button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'Correct! The Human Development Index (HDI) uses health, education, and wealth data.')">Human Development Index (HDI)</button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'Wrong! Literacy rates only capture educational parameters.')">Literacy Rate</button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'Wrong! This tracks raw production velocity.')">Real GDP Growth Rate</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="lesson-2" class="lesson-panel lesson-2">
+  <div class="lesson-hero">
+    <div class="lesson-tag">🚢 Lesson 2 of 5 · 4.1.2</div>
+    <h2>International Trade & Growth</h2>
+    <p class="lesson-desc">Examine the drivers behind export value channels, structural import trends, and how domestic brands navigate international market expansion opportunities.</p>
+    <div class="lesson-objectives">
+      <span class="obj-pill">✓ Specialisation & Comparative Advantage</span>
+      <span class="obj-pill">✓ Foreign Direct Investment (FDI)</span>
+      <span class="obj-pill">✓ Business Growth Linkages</span>
+    </div>
+  </div>
+
+  <div class="spec-box">
+    <div class="spec-box-label"><span class="spec-ref">4.1.2</span> Specification Learning Outcomes</div>
+    <ul class="spec-list">
+      <li>The structural importance of specialization and trade for expanding systems</li>
+      <li>Competitive vs Comparative advantage models</li>
+      <li>FDI trends and their fundamental impacts on fast-developing zones</li>
+    </ul>
+  </div>
+
+  <div class="lesson-content">
+    <div class="topic-header">
+      <div class="topic-icon">⚔️</div>
+      <div>
+        <h3>Advantage Core Models</h3>
+        <p>Distinguishing competitive strategies from macro endowment systems</p>
+      </div>
+    </div>
+
+    <div class="compare-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Concept Type</th>
+            <th class="green-head">Comparative Advantage</th>
+            <th class="red-head">Competitive Advantage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Structural Focus</td>
+            <td>Ability to generate specific outputs at a lower comparative opportunity cost baseline.</td>
+            <td>Business-specific strategies (differentiation/cost leadership) driving asymmetric margins over sector rivals.</td>
+          </tr>
+          <tr>
+            <td>Strategic Driver</td>
+            <td>Natural factor endowments (climate, specialized geography, resource depths).</td>
+            <td>Operational execution, distinct intellectual properties, structural brand equity.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="fdi-box">
+      <h4>🏢 Foreign Direct Investment (FDI) Mechanisms</h4>
+      <div class="fdi-row">
+        <div class="fdi-type">
+          <h5>Inward Investment</h5>
+          <p>External capital entering a domestic market to set up assets. Triggers job architecture creation and vertical technology dispersion transfers.</p>
+        </div>
+        <div class="fdi-type">
+          <h5>Outward Investment</h5>
+          <p>Domestic firms deploying capital structures into external sovereign landscapes to acquire strategic resource footprints or set up offshore branches.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <h3>✍️ Lesson 2 Checkpoint</h3>
+      <div class="quiz-q">
+        <div class="q-num">Question 2</div>
+        <p class="q-text">When a business holds a unique edge over its direct commercial competitors via brand differentiation, it possesses a:</p>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'Wrong! Comparative advantage concerns sovereign opportunity cost dynamics.')">Comparative Advantage</button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'Correct! Competitive advantage is achieved through unique differentiation or cost leadership strategies.')">Competitive Advantage</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="lesson-3" class="lesson-panel lesson-3">
+  <div class="lesson-hero">
+    <div class="lesson-tag">🌐 Lesson 3 of 5 · 4.1.3</div>
+    <h2>Factors of Globalisation</h2>
+    <p class="lesson-desc">Deconstruct the specific structural mechanisms that accelerated global economic integration over recent decades.</p>
+    <div class="lesson-objectives">
+      <span class="obj-pill">✓ Trade Liberalisation</span>
+      <span class="obj-pill">✓ Structural Containerisation</span>
+      <span class="obj-pill">✓ MNC Footprint Scale</span>
+    </div>
+  </div>
+
+  <div class="spec-box">
+    <div class="spec-box-label"><span class="spec-ref">4.1.3</span> Specification Learning Outcomes</div>
+    <ul class="spec-list">
+      <li>Political transformations reducing protectionist barriers</li>
+      <li>Transport innovations lowering per-unit transaction friction</li>
+      <li>The systemic rise of Multinational Corporations (MNCs)</li>
+    </ul>
+  </div>
+
+  <div class="lesson-content">
+    <div class="topic-header">
+      <div class="topic-icon">⚙️</div>
+      <div>
+        <h3>The Core Engines of Integration</h3>
+        <p>The structural forces behind global market compression</p>
+      </div>
+    </div>
+
+    <div class="content-grid thirds">
+      <div class="card">
+        <h4>🔓 Liberalisation</h4>
+        <p>The systematic unwinding of tariffs and quotas via WTO negotiation tracks, transforming historically insulated zones into open networks.</p>
+      </div>
+      <div class="card">
+        <h4>📦 Containerisation</h4>
+        <p>The standardization of shipping containers. This radically collapsed the cost of long-distance cargo handling and transport logistics.</p>
+      </div>
+      <div class="card">
+        <h4>💻 Tech & Comms</h4>
+        <p>Real-time vertical tracking and internet backbones allow head offices to seamlessly manage complex, multi-tiered global supply chains.</p>
+      </div>
+    </div>
+
+    <div class="examiner-tip">
+      <div class="tip-label">💡 Examiner Application Strategy</div>
+      <h4>Linking Globalisation to Operating Costs</h4>
+      <p>When analyzing business strategy, do not just say "globalisation increases sales." Anchor your analysis chains in how containerisation and communication networks allow firms to fragment their value chains—sourcing materials where they are cheapest and keeping inventory levels highly lean.</p>
+    </div>
+  </div>
+</div>
+
+<div id="lesson-4" class="lesson-panel lesson-4">
+  <div class="lesson-hero">
+    <div class="lesson-tag">🛡️ Lesson 4 of 5 · 4.1.4</div>
+    <h2>Protectionism</h2>
+    <p class="lesson-desc">Analyze the strategic, political, and commercial mechanisms nations deploy to deliberately insulate domestic industries from global competition.</p>
+    <div class="lesson-objectives">
+      <span class="obj-pill">✓ Tariffs & Quotas</span>
+      <span class="obj-pill">✓ Subsidies & Non-Tariff Barriers</span>
+      <span class="obj-pill">✓ Impact Patterns on Stakeholders</span>
+    </div>
+  </div>
+
+  <div class="spec-box">
+    <div class="spec-box-label"><span class="spec-ref">4.1.4</span> Specification Learning Outcomes</div>
+    <ul class="spec-list">
+      <li>Methods of protectionism: Tariffs, quotas, subsidies, and administrative barriers</li>
+      <li>Impact of protectionism on domestic and foreign business entities, consumers, and governments</li>
+    </ul>
+  </div>
+
+  <div class="lesson-content">
+    <div class="topic-header">
+      <div class="topic-icon">🧱</div>
+      <div>
+        <h3>The Protectionist Toolkit</h3>
+        <p>How states systematically intervene in cross-border commerce</p>
+      </div>
+    </div>
+
+    <div class="protection-cards">
+      <div class="pcard">
+        <div class="pc-icon">🧾</div>
+        <h4>Tariffs</h4>
+        <p>Customs duties or import taxes placed on incoming foreign goods to artificially push up their retail price.</p>
+      </div>
+      <div class="pcard">
+        <div class="pc-icon">🛑</div>
+        <h4>Quotas</h4>
+        <p>Strict quantitative ceilings restricting the absolute physical volume of a specific good allowed past borders.</p>
+      </div>
+      <div class="pcard">
+        <div class="pc-icon">💰</div>
+        <h4>Subsidies</h4>
+        <p>Direct financial assistance grants paid to domestic firms to lower their operating costs and make them more price-competitive.</p>
+      </div>
+      <div class="pcard">
+        <div class="pc-icon">📋</div>
+        <h4>Barriers</h4>
+        <p>Complex administrative rules, strict labeling conditions, or excessive safety certifications designed to stall import flows.</p>
+      </div>
+    </div>
+
+    <div class="compare-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Stakeholder Group</th>
+            <th class="red-head">Negative Consequences</th>
+            <th class="green-head">Positive Outcomes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Domestic Consumers</td>
+            <td>Face reduced choice and higher retail prices due to insulated, uncompetitive market environments.</td>
+            <td>Can see temporary insulation of localized employment opportunities in protected sectors.</td>
+          </tr>
+          <tr>
+            <td>Foreign Exporters</td>
+            <td>Face severe margin pressure or loss of market access as their price advantages are neutralized.</td>
+            <td>Are incentivized to build production facilities directly inside the target country (tariff-jumping FDI).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="lesson-5" class="lesson-panel lesson-5">
+  <div class="lesson-hero">
+    <div class="lesson-tag">🤝 Lesson 5 of 5 · 4.1.5</div>
+    <h2>Trading Blocs</h2>
+    <p class="lesson-desc">Evaluate the nature, opportunities, and strategic constraints of regional economic integration agreements.</p>
+    <div class="lesson-objectives">
+      <span class="obj-pill">✓ Free Trade Areas vs Customs Unions</span>
+      <span class="obj-pill">✓ Major Trading Blocs (EU, USMCA, ASEAN)</span>
+      <span class="obj-pill">✓ Trade Creation vs Trade Diversion</span>
+    </div>
+  </div>
+
+  <div class="spec-box">
+    <div class="spec-box-label"><span class="spec-ref">4.1.5</span> Specification Learning Outcomes</div>
+    <ul class="spec-list">
+      <li>Characteristics and expansion of key global regional trade groupings</li>
+      <li>Impact on business strategies: Market access expansions vs regulatory constraints</li>
+    </ul>
+  </div>
+
+  <div class="lesson-content">
+    <div class="topic-header">
+      <div class="topic-icon">🗺️</div>
+      <div>
+        <h3>Global Trading Blocs</h3>
+        <p>Examining the structural integration formats of key regional partnerships</p>
+      </div>
+    </div>
+
+    <div class="bloc-cards">
+      <div class="bloc-card">
+        <div class="bloc-head">🇪🇺 European Union</div>
+        <div class="bloc-body">
+          <li>A deep single market framework.</li>
+          <li>Full harmonization of technical standards.</li>
+          <li>Guarantees the free movement of goods, labor, services, and capital.</li>
+        </div>
+      </div>
+      <div class="bloc-card">
+        <div class="bloc-head">🇺🇸 USMCA</div>
+        <div class="bloc-body">
+          <li>Eliminates internal tariffs between the US, Mexico, and Canada.</li>
+          <li>Each member retains complete autonomy over its external tariff rates with outside countries.</li>
+        </div>
+      </div>
+      <div class="bloc-card">
+        <div class="bloc-head">🌏 ASEAN</div>
+        <div class="bloc-body">
+          <li>Accelerates trade integration across Southeast Asia.</li>
+          <li>Fosters massive manufacturing investment networks.</li>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="card">
+        <h4>📈 Commercial Advantages</h4>
+        <ul>
+          <li>Access to a much larger, tariff-free regional consumer pool.</li>
+          <li>Opportunities to achieve greater internal economies of scale.</li>
+          <li>Streamlined, low-friction supply chains across member countries.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>📉 Commercial Risks</h4>
+        <ul>
+          <li>Intense competition from lower-cost producers within the bloc.</li>
+          <li>Compliance costs tied to strict regional regulatory standards.</li>
+          <li><strong>Trade Diversion:</strong> Being forced to buy from inefficient regional partners over cheaper global suppliers outside the bloc due to external tariffs.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="lesson-6" class="lesson-panel lesson-6">
+  <div class="lesson-hero">
+    <div class="lesson-tag">📝 Theme 4 Assessment Arena</div>
+    <h2>Exam Practice</h2>
+    <p class="lesson-desc">Master your assessment timing, chain structure rules, and contextual data applications for Theme 4.</p>
+  </div>
+  
+  <div class="lesson-content">
+    <div class="exam-section">
+      <div class="exam-section-header">
+        <span class="exam-badge">Paper 3 Style</span>
+        <h3>Section A Case Crack</h3>
+      </div>
+      
+      <div class="exam-q-card">
+        <div class="exam-q-header">
+          <span class="eq-type">Data Analysis / Evaluation</span>
+          <span class="eq-marks">10 Marks</span>
+        </div>
+        <div class="exam-q-body">
+          <div class="exam-context">
+            <strong>Context:</strong> A UK-based luxury sportswear retailer is considering expanding its retail footprint into the MINT economy group, specifically targeting Indonesia, where middle-class consumer spending metrics have expanded consistently over consecutive cycles.
+          </div>
+          <p class="exam-question">Assess the potential implications of rapid economic growth in emerging markets such as Indonesia for a mature UK export brand. </p>
+          <button class="exam-toggle-btn" onclick="toggleMarkScheme(this)">View Mark Scheme Analysis</button>
+          
+          <div class="mark-scheme">
+            <div class="ms-label">Official Evaluative Framework Breakdown</div>
+            <div class="ms-indicative">
+              <h5>Indicative Knowledge & Analysis (Knowledge/Application Focus)</h5>
+              <ul>
+                <li>Understanding of key growth attributes (e.g., expanding real disposable margins, shifts across demographic indicators).</li>
+                <li>Application directly tying context parameters to brand operations (positioning premium athletic wear against ascending middle-class tastes).</li>
+              </ul>
+              <h5>Counter-Balancing Analysis points (Evaluation Focus)</h5>
+              <ul>
+                <li>Operational vulnerabilities linked to structural infrastructure lag or exchange execution friction.</li>
+                <li>Strategic distribution challenges when navigating entrenched local domestic alternatives or differing cultural preferences.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="lesson-nav">
+  <button class="nav-btn" id="prevBtn" onclick="navigateLesson(-1)" disabled>← Previous Lesson</button>
+  <div class="progress-bar-wrap" style="width: 200px;">
+    <span>Progress</span>
+    <div class="progress-bar">
+      <div class="progress-fill" id="appProgress" style="width: 16.6%;"></div>
+    </div>
+  </div>
+  <button class="nav-btn" id="nextBtn" onclick="navigateLesson(1)">Next Lesson →</button>
+</footer>
+
+<script>
+  let currentLesson = 1;
+  const totalLessons = 6;
+
+  function initChart() {
+    const chartContainer = document.getElementById('gdpChart');
+    if (!chartContainer) return;
+    
+    const chartData = [
+      { year: '2010', china: 10.6, uk: 1.9 },
+      { year: '2015', china: 7.0, uk: 2.4 },
+      { year: '2020', china: 2.2, uk: -10.4 }, 
+      { year: '2024', china: 4.6, uk: 0.6 }
+    ];
+    
+    chartContainer.innerHTML = '';
+    
+    chartData.forEach(d => {
+      const cHeight = Math.max(d.china * 6, 4);
+      const uHeight = d.uk < 0 ? Math.abs(d.uk * 4) : Math.max(d.uk * 6, 2);
+      const isNegative = d.uk < 0;
+      
+      const item = document.createElement('div');
+      item.className = 'bar-item';
+      item.innerHTML = `
+        <div style="display:flex; width:100%; gap:2px; height:80px; align-items:flex-end;">
+          <div class="bar-fill" style="height:${cHeight}px; background:var(--teal);" title="China: ${d.china}%"></div>
+          <div class="bar-fill" style="height:${uHeight}px; background:${isNegative ? 'var(--red)' : 'var(--blue)'};" title="UK: ${d.uk}%"></div>
+        </div>
+        <div class="bar-label">${d.year}</div>
+      `;
+      chartContainer.appendChild(item);
+    });
+  }
+
+  function switchLesson(lessonNum) {
+    if(lessonNum < 1 || lessonNum > totalLessons) return;
+    
+    currentLesson = lessonNum;
+    
+    document.querySelectorAll('.lesson-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    
+    document.getElementById(`lesson-${lessonNum}`).classList.add('active');
+    document.querySelector(`[data-lesson="${lessonNum}"]`).classList.add('active');
+    
+    document.getElementById('prevBtn').disabled = (lessonNum === 1);
+    document.getElementById('nextBtn').disabled = (lessonNum === totalLessons);
+    
+    const progressPercent = (lessonNum / totalLessons) * 100;
+    document.getElementById('appProgress').style.width = `${progressPercent}%`;
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function navigateLesson(direction) {
+    switchLesson(currentLesson + direction);
+  }
+
+  function checkAnswer(btn, isCorrect, feedbackText) {
+    const parentQ = btn.closest('.quiz-q');
+    const options = parentQ.querySelectorAll('.opt-btn');
+    const feedbackBox = parentQ.querySelector('.feedback');
+    
+    options.forEach(opt => opt.disabled = true);
+    
+    if(isCorrect) {
+      btn.classList.add('correct');
+      feedbackBox.className = "feedback show fb-correct";
+      feedbackBox.innerHTML = `<strong>Correct!</strong> ${feedbackText}`;
+    } else {
+      btn.classList.add('wrong');
+      feedbackBox.className = "feedback show fb-wrong";
+      feedbackBox.innerHTML = `<strong>Incorrect.</strong> ${feedbackText}`;
+      
+      options.forEach(opt => {
+        if(opt.getAttribute('onclick').includes('true')) {
+          opt.classList.add('correct');
+        }
+      });
+    }
+  }
+
+  function toggleMarkScheme(btn) {
+    const scheme = btn.nextElementSibling;
+    if(scheme.classList.contains('show')) {
+      scheme.classList.remove('show');
+      btn.textContent = "View Mark Scheme Analysis";
+    } else {
+      scheme.classList.add('show');
+      btn.textContent = "Hide Mark Scheme Analysis";
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    initChart();
+  });
+</script>
+</body>
+</html>
