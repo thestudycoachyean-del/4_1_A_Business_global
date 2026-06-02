@@ -379,6 +379,64 @@
   }
   .stat-box .stat-label { font-size: 0.75rem; color: #777; line-height: 1.4; }
 
+  /* REVISED ECONOMIC COMPARISON DISPLAY */
+  .gdp-comparison-box {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid #e8e4dc;
+    margin-bottom: 1.5rem;
+  }
+  .gdp-comparison-box h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--ink);
+  }
+  .gdp-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+  }
+  .gdp-data-table th, .gdp-data-table td {
+    padding: 0.75rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid #f0ece4;
+    font-size: 0.88rem;
+  }
+  .gdp-data-table th {
+    background: #fdfbb7;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .gdp-data-table th:first-child, .gdp-data-table td:first-child {
+    text-align: left;
+    font-weight: 700;
+  }
+  .china-cell {
+    color: var(--teal);
+    font-weight: 700;
+    background: rgba(10, 124, 110, 0.05);
+  }
+  .uk-cell {
+    color: var(--blue);
+    font-weight: 700;
+    background: rgba(26, 60, 110, 0.05);
+  }
+  .negative-gdp {
+    color: var(--red) !important;
+  }
+  .gdp-analysis-note {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.5;
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed #ddd;
+  }
+
   /* ── INDICATOR CARDS ── */
   .indicator-grid {
     display: grid;
@@ -669,63 +727,6 @@
   .ms-indicative ul li:last-child { border-bottom: none; }
   .ms-indicative ul li::before { content:'•'; position: absolute; left:0; color: var(--teal); }
 </style>
-  /* REVISED ECONOMIC COMPARISON DISPLAY */
-  .gdp-comparison-box {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    border: 1px solid #e8e4dc;
-    margin-bottom: 1.5rem;
-  }
-  .gdp-comparison-box h4 {
-    font-family: 'Fraunces', serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--ink);
-  }
-  .gdp-data-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 0.5rem;
-  }
-  .gdp-data-table th, .gdp-data-table td {
-    padding: 0.75rem 1rem;
-    text-align: center;
-    border-bottom: 1px solid #f0ece4;
-    font-size: 0.88rem;
-  }
-  .gdp-data-table th {
-    background: #fdfbb7;
-    font-weight: 600;
-    color: var(--ink);
-  }
-  .gdp-data-table th:first-child, .gdp-data-table td:first-child {
-    text-align: left;
-    font-weight: 700;
-  }
-  .china-cell {
-    color: var(--teal);
-    font-weight: 700;
-    background: rgba(10, 124, 110, 0.05);
-  }
-  .uk-cell {
-    color: var(--blue);
-    font-weight: 700;
-    background: rgba(26, 60, 110, 0.05);
-  }
-  .negative-gdp {
-    color: var(--red) !important;
-  }
-  .gdp-analysis-note {
-    font-size: 0.8rem;
-    color: #666;
-    line-height: 1.5;
-    margin-top: 1rem;
-    padding-top: 0.8rem;
-    border-top: 1px dashed #ddd;
-  }
 </head>
 <body>
 
@@ -817,7 +818,7 @@
       </div>
     </div>
 
-   <div class="gdp-comparison-box">
+    <div class="gdp-comparison-box">
       <h4>📊 Macro Track: Annual Real GDP Growth Rate (%) Comparison</h4>
       <p style="font-size: 0.82rem; color: #666; margin-bottom: 1rem;">
         A direct look at the contrast between an emerging manufacturing superpower (China) and a mature, service-driven economy (UK).
@@ -857,7 +858,7 @@
 
       <div class="gdp-analysis-note">
         <strong>💡 Core Revision Takeaway for Exam Analysis:</strong> <br>
-        Notice how China maintains positive velocity even during macro shocks, whereas the UK displays maturity traits—lower expansion ceilings and steeper vulnerability to systemic corrections (as seen in 2020).
+        Notice how China maintains positive velocity even during macro shocks, whereas the UK displays structural maturity traits—lower expansion ceilings and steeper vulnerability to systemic corrections (as seen in 2020).
       </div>
     </div>
 
@@ -1303,37 +1304,6 @@
   let currentLesson = 1;
   const totalLessons = 6;
 
-  function initChart() {
-    const chartContainer = document.getElementById('gdpChart');
-    if (!chartContainer) return;
-    
-    const chartData = [
-      { year: '2010', china: 10.6, uk: 1.9 },
-      { year: '2015', china: 7.0, uk: 2.4 },
-      { year: '2020', china: 2.2, uk: -10.4 }, 
-      { year: '2024', china: 4.6, uk: 0.6 }
-    ];
-    
-    chartContainer.innerHTML = '';
-    
-    chartData.forEach(d => {
-      const cHeight = Math.max(d.china * 6, 4);
-      const uHeight = d.uk < 0 ? Math.abs(d.uk * 4) : Math.max(d.uk * 6, 2);
-      const isNegative = d.uk < 0;
-      
-      const item = document.createElement('div');
-      item.className = 'bar-item';
-      item.innerHTML = `
-        <div style="display:flex; width:100%; gap:2px; height:80px; align-items:flex-end;">
-          <div class="bar-fill" style="height:${cHeight}px; background:var(--teal);" title="China: ${d.china}%"></div>
-          <div class="bar-fill" style="height:${uHeight}px; background:${isNegative ? 'var(--red)' : 'var(--blue)'};" title="UK: ${d.uk}%"></div>
-        </div>
-        <div class="bar-label">${d.year}</div>
-      `;
-      chartContainer.appendChild(item);
-    });
-  }
-
   function switchLesson(lessonNum) {
     if(lessonNum < 1 || lessonNum > totalLessons) return;
     
@@ -1392,10 +1362,6 @@
       btn.textContent = "Hide Mark Scheme Analysis";
     }
   }
-
-  window.addEventListener('DOMContentLoaded', () => {
-    initChart();
-  });
 </script>
 </body>
 </html>
